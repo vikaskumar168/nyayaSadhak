@@ -8,7 +8,6 @@ Access my site at [google.com](https://google.com)
 
 ## Table of Content:
 
-- [About The App](#about-the-app)
 - [Screenshots](#screenshots)
 - [Technologies](#technologies)
 - [Setup](#setup)
