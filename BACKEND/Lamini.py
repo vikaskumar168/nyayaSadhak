@@ -1,21 +1,20 @@
 import torch
-from langchain import HuggingFacePipeline, PromptTemplate
+from langchain import HuggingFacePipeline
 from langchain.chains import RetrievalQA
-from transformers import AutoTokenizer, TextStreamer, pipeline,AutoModelForSeq2SeqLM
+from transformers import AutoTokenizer, pipeline, AutoModelForSeq2SeqLM
 from langchain.vectorstores import Chroma
 from langchain.embeddings import HuggingFaceInstructEmbeddings
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import logging
 
-import streamlit as st 
-
+import streamlit as st
 
 DEVICE = "cuda:0" if torch.cuda.is_available() else "cpu"
 
-print(DEVICE, torch.cuda.is_available())
-print(torch.version.cuda)
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-#model and tokenizer loading
 checkpoint = "LaMini-T5-738M"
 tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 base_model = AutoModelForSeq2SeqLM.from_pretrained(checkpoint, device_map='cuda', torch_dtype=torch.float32)
@@ -56,9 +55,7 @@ def process_answer(instruction):
     qa = qa_llm()
     generated_text = qa(instruction)
     answer = generated_text['result']
-    return answer,generated_text
-
-
+    return answer, generated_text
 
 app = FastAPI()
 
@@ -75,8 +72,16 @@ app.add_middleware(
 )
 
 @app.get("/")
-async def llmQuery(query: str):
-    print("query is", query)    
-    answer, metadata = process_answer(query)
-    print(answer, metadata)
-    return {"result" : answer, "metadata" : metadata}
+async def query_model(query: str):
+    logger.info("Query received: %s", query)
+    try:
+        answer, metadata = process_answer(query)
+        logger.info("Answer generated: %s", answer)
+        return {"result": answer, "metadata": metadata}
+    except Exception as e:
+        logger.error("An error occurred: %s", e)
+        return {"error": "An error occurred while processing the query"}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
