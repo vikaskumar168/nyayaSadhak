@@ -12,3 +12,5 @@ pypdf
 InstructorEmbedding
 FastAPI
 optimum
+PyTorch
+tensorflow
