@@ -17,9 +17,7 @@ Access my site at [google.com](https://google.com)
 - [Credits](#credits)
 - [License](#license)
 
-## About The App
 
-NyayaSadhak is an app that ...
 
 ## Screenshots
 
