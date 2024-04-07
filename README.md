@@ -4,7 +4,7 @@
 
 ## Demo Video link:
 
-([https://demovideo.com](https://drive.google.com/drive/folders/1VKJ3gQh2ZZIHdzqmHSJS3mw3FxcdktaN?usp=sharing))
+([https://demovideo.com](https://youtu.be/q09V3TIPUuw))
 
 ## Table of Content:
 
