@@ -12,4 +12,6 @@ pypdf
 InstructorEmbedding
 FastAPI
 optimum
+PyTorch
+tensorflow
 langchain_community.embeddings
