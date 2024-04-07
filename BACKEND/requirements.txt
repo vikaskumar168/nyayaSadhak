@@ -6,7 +6,7 @@ einops
 accelerate
 pdfminer.six
 bs4
-sentence_transformers
+sentence-transformers==2.2.2
 chromadb
 pypdf
 InstructorEmbedding
@@ -14,3 +14,4 @@ FastAPI
 optimum
 PyTorch
 tensorflow
+langchain_community.embeddings
