@@ -1,5 +1,6 @@
 import torch
 # from auto_gptq import AutoGPTQForCausalLM
+from langchain_community.embeddings import HuggingFaceInstructEmbeddings
 from langchain import HuggingFacePipeline, PromptTemplate
 from langchain.chains import RetrievalQA
 from transformers import AutoTokenizer, TextStreamer, pipeline, AutoModelForCausalLM
