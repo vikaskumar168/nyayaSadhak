@@ -31,7 +31,7 @@ NyayaSadhak is an app that ...
 
 ## Technologies
 
-I used `javascript`, `tailwind CSS`, `Reactjs`, `HTML`, `Python`
+I used `javascript`, `tailwind CSS`, `Reactjs`, `HTML`, `Python`, and Python Library like  `langchain`, `streamlit`, `FastAPI`, `accelerate`, `InstructorEmbedding` 
 
 ## Setup
 
