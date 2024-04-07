@@ -28,17 +28,6 @@ model_basename = "model"
 
 tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, use_fast=True)
 
-# model = AutoGPTQForCausalLM.from_quantized(
-#     model_name_or_path,
-#     revision="gptq-4bit-128g-actorder_True",
-#     model_basename=model_basename,
-#     use_safetensors=True,
-#     trust_remote_code=True,
-#     inject_fused_attention=False,
-#     device=DEVICE,
-#     quantize_config=None,
-# )
-
 model = AutoModelForCausalLM.from_pretrained(
     model_name_or_path,
     device_map="auto",
@@ -58,18 +47,6 @@ If a question does not make any sense, or is not factually coherent, explain why
 """.strip()
 
 print(DEFAULT_SYSTEM_PROMPT)
-
-# def generate_prompt(prompt: str, system_prompt: str = DEFAULT_SYSTEM_PROMPT) -> str:
-#     # Guanaco style for TinyLlama
-#     B_INST, E_INST = "### Human:", "### Assistant:"
-#     B_SYS, E_SYS = "\n", "\n\n"
-
-#     # # Llama style
-#     # B_INST, E_INST = "[INST]", "[/INST]"
-#     # B_SYS, E_SYS = "<>\n", "\n<>\n\n"
-
-#     prompt = f"{B_INST} {B_SYS}{system_prompt.strip()}{E_SYS}{prompt.strip()} {E_INST}\n\n"
-#     return prompt
 
 
 def generate_prompt(prompt: str, system_prompt: str = DEFAULT_SYSTEM_PROMPT) -> str:
