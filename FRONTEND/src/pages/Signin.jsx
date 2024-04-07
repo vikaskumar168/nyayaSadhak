@@ -1,29 +1,37 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth"; // Import GoogleAuthProvider and signInWithPopup
-import { auth } from "../firebase"; // Import auth from Firebase
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { auth } from "../firebase";
 import Logo from "../assets/logo.png";
 
-const Signup = () => {
+const Signin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const signUpWithGoogle = async () => {
+  const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
-      // Navigate to your desired page after successful sign-up
+      // Navigate to your desired page after successful sign-in
       navigate("/bot");
     } catch (error) {
-      console.error("Error signing up with Google:", error);
+      console.error("Error signing in with Google:", error);
     }
   };
+  
+  
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle sign-up with email and password
-    // Add your sign-up logic here using email and password
-    navigate("/bot");
-  }
+    // Handle sign-in with email and password
+    try {
+      // Add your sign-in logic here using email and password
+      navigate("/bot");
+    } catch (error) {
+      console.error("Error signing in:", error);
+    }
+  };
 
   return (
     <main className="w-full h-screen flex flex-col items-center justify-center px-4">
@@ -32,15 +40,17 @@ const Signup = () => {
           <img src={Logo} width={150} className="mx-auto" alt="Logo" />
           <div className="mt-5">
             <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">
-              Create a new account
+              Log in to your account
             </h3>
           </div>
         </div>
-        <form onSubmit={(e) => handleSubmit(e)} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label className="font-medium">Email</label>
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
               className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
             />
@@ -49,17 +59,19 @@ const Signup = () => {
             <label className="font-medium">Password</label>
             <input
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
               className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
             />
           </div>
           <button className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
-            Sign up
+            Sign in
           </button>
         </form>
         <button
           className="w-full flex items-center justify-center gap-x-3 py-2.5 border rounded-lg text-sm font-medium hover:bg-gray-50 duration-150 active:bg-gray-100"
-          onClick={signUpWithGoogle}
+          onClick={signInWithGoogle}
         >
           <svg
             className="w-5 h-5"
@@ -67,7 +79,7 @@ const Signup = () => {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g clipPath="url(#clip0_17_40)">
+           <g clipPath="url(#clip0_17_40)">
               <path
                 d="M47.532 24.5528C47.532 22.9214 47.3997 21.2811 47.1175 19.6761H24.48V28.9181H37.4434C36.9055 31.8988 35.177 34.5356 32.6461 36.2111V42.2078H40.3801C44.9217 38.0278 47.532 31.8547 47.532 24.5528Z"
                 fill="#4285F4"
@@ -94,12 +106,12 @@ const Signup = () => {
           Continue with Google
         </button>
         <p className="text-center">
-          Already have an account?{" "}
+          Don't have an account?{" "}
           <Link
-            to="/login"
+            to="/signup"
             className="font-medium text-indigo-600 hover:text-indigo-500"
           >
-            Sign in
+            Sign up
           </Link>
         </p>
       </div>
@@ -107,4 +119,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Signin;
