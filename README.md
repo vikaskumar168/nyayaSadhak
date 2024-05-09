@@ -20,7 +20,7 @@
 
 ## Screenshots
 
-<img src="/FRONTEND/src/assets/Screenshot (107).png" alt="alt text" />
+<img src="FRONTEND/src/assets/Law-1.jpg" alt="alt text" />
 <img src="/FRONTEND/src/assets/Screenshot (105).png" alt="alt text" />
 <img src="/FRONTEND/src/assets/Screenshot (106).png" alt="alt text" />
 
